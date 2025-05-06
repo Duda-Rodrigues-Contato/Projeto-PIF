@@ -1,37 +1,72 @@
-#include "game.h"
+#include "../include/game.h"
+#include "../cli-lib/cli.h"
 #include <string.h>
+#include <stdlib.h>
+#include <time.h>
 
-void iniciar_jogo(Jogo *jogo) {
-    jogo->vidas = 3;
-    jogo->progresso = 0;
-    jogo->nivel = 1;
+#define MAX_PALAVRAS 5
+#define MAX_INIMIGOS 5
+
+Palavra palavras[MAX_PALAVRAS];
+Inimigo inimigos[MAX_INIMIGOS];
+
+void iniciar_jogo() {
+    for (int i = 0; i < MAX_PALAVRAS; i++) {
+        palavras[i].x = rand() % 40;
+        palavras[i].y = 0;
+        strcpy(palavras[i].palavra, "hack");
+        palavras[i].ativa = 1;
+    }
+
+    for (int i = 0; i < MAX_INIMIGOS; i++) {
+        inimigos[i].x = rand() % 40;
+        inimigos[i].y = 20;
+        inimigos[i].ativo = 1;
+    }
 }
 
-void atualizar_palavras(Palavra *palavras, int qtd) {
-    for (int i = 0; i < qtd; i++) {
+void atualizar_jogo() {
+    for (int i = 0; i < MAX_PALAVRAS; i++) {
         if (palavras[i].ativa) {
-            palavras[i].y += 1;
+            palavras[i].x++; // palavras "caem" para a direita
         }
     }
-}
 
-void mover_inimigos(Inimigo *inimigos, int qtd) {
-    for (int i = 0; i < qtd; i++) {
-        if (inimigos[i].ativa) {
-            inimigos[i].y -= 1;
+    for (int i = 0; i < MAX_INIMIGOS; i++) {
+        if (inimigos[i].ativo) {
+            inimigos[i].y--; // inimigos sobem
         }
     }
+
+    verificar_colisoes();
 }
 
-void checar_digito(char input, Palavra *palavras, int qtd, Jogo *jogo) {
-    for (int i = 0; i < qtd; i++) {
-        if (palavras[i].ativa && palavras[i].texto[0] == input) {
-            memmove(palavras[i].texto, palavras[i].texto + 1, strlen(palavras[i].texto));
-            if (strlen(palavras[i].texto) == 0) {
-                palavras[i].ativa = 0;
-                jogo->progresso += 10;
+void desenhar_jogo() {
+    cli_clear();
+
+    for (int i = 0; i < MAX_PALAVRAS; i++) {
+        if (palavras[i].ativa) {
+            cli_draw_text(palavras[i].x, palavras[i].y, palavras[i].palavra);
+        }
+    }
+
+    for (int i = 0; i < MAX_INIMIGOS; i++) {
+        if (inimigos[i].ativo) {
+            cli_draw_text(inimigos[i].x, inimigos[i].y, "V");
+        }
+    }
+
+    cli_present();
+}
+
+void verificar_colisoes() {
+    for (int i = 0; i < MAX_PALAVRAS; i++) {
+        for (int j = 0; j < MAX_INIMIGOS; j++) {
+            if (palavras[i].ativa && inimigos[j].ativo &&
+                palavras[i].x == inimigos[j].x &&
+                palavras[i].y == inimigos[j].y) {
+                palavras[i].ativa = 0; // palavra destruída
             }
-            break;
         }
     }
 }

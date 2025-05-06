@@ -2,25 +2,19 @@
 #define GAME_H
 
 typedef struct {
-    char texto[20];
     int x, y;
+    char palavra[20];
     int ativa;
 } Palavra;
 
 typedef struct {
     int x, y;
-    int ativa;
+    int ativo;
 } Inimigo;
 
-typedef struct {
-    int vidas;
-    int progresso;
-    int nivel;
-} Jogo;
-
-void iniciar_jogo(Jogo *jogo);
-void atualizar_palavras(Palavra *palavras, int qtd);
-void mover_inimigos(Inimigo *inimigos, int qtd);
-void checar_digito(char input, Palavra *palavras, int qtd, Jogo *jogo);
+void iniciar_jogo();
+void atualizar_jogo();
+void desenhar_jogo();
+void verificar_colisoes();
 
 #endif
