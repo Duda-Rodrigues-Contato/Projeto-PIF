@@ -1,21 +1,20 @@
-#include "../include/game.h"
-#include "../cli-lib/cli.h"
-#include <unistd.h>
-#include <stdlib.h>
-#include <time.h>
+#include <string.h>
+#include "screen.h"
+#include "keyboard.h"
+#include "timer.h"
 
 int main() {
-    cli_init();
-    srand(time(NULL));
 
-    iniciar_jogo();
+    screenInit(1);
+    screenInit();
+    keyboardInit();
+    
+    while(1) {
 
-    while (1) {
-        atualizar_jogo();
-        desenhar_jogo();
-        usleep(200000); 
+        screenDrawInimigos();
+        screenUpdate();
+
     }
 
-    cli_close();
     return 0;
 }
