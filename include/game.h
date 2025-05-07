@@ -1,4 +1,4 @@
-#ifndef GAME_H
+/*#ifndef GAME_H
 #define GAME_H
 
 typedef struct {
@@ -17,4 +17,4 @@ void atualizar_jogo();
 void desenhar_jogo();
 void verificar_colisoes();
 
-#endif
+#endif*/

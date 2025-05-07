@@ -6,15 +6,10 @@
 int main() {
 
     screenInit(1);
-    screenInit();
-    keyboardInit();
-    
-    while(1) {
+    telaInicial();
+    screenUpdate();
 
-        screenDrawInimigos();
-        screenUpdate();
-
-    }
+    screenDestroy();
 
     return 0;
 }

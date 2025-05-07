@@ -3,6 +3,9 @@
 
 #include <stdio.h>
 
+#define BOX_VLINE 0x78
+#define BOX_HLINE 0x71
+
 #define MAXX 80
 #define MAXY 24
 #define MINX 1
@@ -34,39 +37,36 @@ void screenUpdate();
 void screenDestroy();
 void screenGotoxy(int x, int y);
 void screenSetColor(screenColor fg, screenColor bg);
+void telaInicial();
 
-
-void desenhaBorda() {
+/*void desenhaBorda() {
 
     screenInit(1);
 
-}
+}*/
 
-
-void corPalavras() {
+// Cor das palavras:
+/*void corPalavras() {
 
     screenSetColor(WHITE, BLUE);
 
-}
-
-void screenColorBackgroung() {
-
-    screenSetColor(BLACK, WHITE);
-}
+}*/
 
 
-void corInimigos() {
+// Cor dos inimigos:
+/*void corInimigos() {
 
     screenSetColor(RED, BLUE);
-}
+}*/
 
-void desenhoInimigo(int x, int y) {
+
+// Desenha os inimigos - Add funçção na função de tela do jogo:
+/*void desenhoInimigo(int x, int y) {
 
     printf("😈");
     corInimigos();
     screenGotoxy(x, y);
 
-}
-
+}*/
 
 #endif

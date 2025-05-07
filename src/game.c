@@ -1,5 +1,4 @@
-#include "../include/game.h"
-#include "../cli-lib/cli.h"
+/*#include "../include/game.h"
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
@@ -69,4 +68,4 @@ void verificar_colisoes() {
             }
         }
     }
-}
+}*/
