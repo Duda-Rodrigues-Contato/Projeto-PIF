@@ -171,6 +171,8 @@ void screenDestroy();
 
 void screenGotoxy(int x, int y);
 
+void screenDrawBorders();
+
 /**
  * Define text colors 
  * @param fg foreground color, can assume values from BLACK to WHITE

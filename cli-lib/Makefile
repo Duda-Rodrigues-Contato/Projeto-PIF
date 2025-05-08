@@ -1,41 +1,33 @@
-# Compiler and flags
+PROJ_NAME = CyberTerminalHacker
+
 CC = gcc
-CFLAGS = -Wall -Werror -g -I$(INCLUDE_DIR)
+CFLAGS = -Iinclude -Wall -Wextra -g
+LDFLAGS = 
 
-#project name
-PROJ_NAME = cli-lib-example
+SRC_DIR = src
+BUILD_DIR = build
+OBJ_DIR = $(BUILD_DIR)/obj
+BIN_DIR = $(BUILD_DIR)/bin
 
-# Target directories
-BUILD_DIR   = build
-OBJ_DIR     = $(BUILD_DIR)/obj
-SRC_DIR     = src
-INCLUDE_DIR = include
+SRCS = $(wildcard $(SRC_DIR)/*.c)
+OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
 
-# Source files
-SRC_FILES = $(notdir $(wildcard $(SRC_DIR)/*.c))
-OBJ_FILES = $(SRC_FILES:%.c=$(OBJ_DIR)/%.o)
+all: setup $(BIN_DIR)/$(PROJ_NAME)
 
-# Build target
-all: $(OBJ_DIR) $(OBJ_FILES)
-	@echo Creating $(BUILD_DIR)/$(PROJ_NAME)
-	@$(CC) $(CFLAGS) -o $(BUILD_DIR)/$(PROJ_NAME) $(OBJ_FILES)
+setup:
+	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(BIN_DIR)
 
-# Build directory
-$(BUILD_DIR):
-	mkdir -p $(BUILD_DIR)
+$(BIN_DIR)/$(PROJ_NAME): $(OBJS)
+	$(CC) $^ -o $@ $(LDFLAGS)
 
-$(OBJ_DIR): $(BUILD_DIR)
-	mkdir -p $(OBJ_DIR)
-
-# Object files
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@echo Compiling $@...
-	@$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
-# Clean target
 clean:
 	rm -rf $(BUILD_DIR)
 
-# Run target
-run: all
-	./$(BUILD_DIR)/cli-lib-example
+run:
+	$(BIN_DIR)/$(PROJ_NAME)
+
+.PHONY: all clean run setup

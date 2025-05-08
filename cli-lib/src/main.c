@@ -1,89 +1,41 @@
-/**
- * main.h
- * Created on Aug, 23th 2023
- * Author: Tiago Barros
- * Based on "From C to C++ course - 2002"
-*/
-
-#include <string.h>
-
-#include "screen.h"
+#include <stdio.h>
+#include <signal.h>
 #include "keyboard.h"
+#include "screen.h"
 #include "timer.h"
+#include "logica.h" // Já inclui todas as definições necessárias
 
-int x = 34, y = 12;
-int incX = 1, incY = 1;
+// Declarações externas (definidas em game_logic.c)
+extern GameState game_state;
+extern FallingWord words[];
+extern char input_buffer[];
+extern int buffer_index;
+extern int last_y_position[];
 
-void printHello(int nextX, int nextY)
-{
-    screenSetColor(CYAN, DARKGRAY);
-    screenGotoxy(x, y);
-    printf("           ");
-    x = nextX;
-    y = nextY;
-    screenGotoxy(x, y);
-    printf("Hello World");
-}
-
-void printKey(int ch)
-{
-    screenSetColor(YELLOW, DARKGRAY);
-    screenGotoxy(35, 22);
-    printf("Key code :");
-
-    screenGotoxy(34, 23);
-    printf("            ");
+int main() {
+    // Configura tratamento de Ctrl+C
+    signal(SIGINT, handle_sigint);
+    atexit(restore_terminal);
     
-    if (ch == 27) screenGotoxy(36, 23);
-    else screenGotoxy(39, 23);
+    // Inicializa o jogo
+    init_game();
 
-    printf("%d ", ch);
-    while (keyhit())
-    {
-        printf("%d ", readch());
+    // Loop principal
+    while(game_state.lives > 0 && game_state.current_word < WORD_COUNT) {
+        if(keyhit()) {
+            handle_input(readch());
+        }
+        update_game();
+        draw_game();
     }
-}
 
-int main() 
-{
-    static int ch = 0;
-    static long timer = 0;
-
-    screenInit(1);
-    keyboardInit();
-    timerInit(50);
-
-    printHello(x, y);
+    // Tela de Game Over
+    screenClear();
+    screenGotoxy(35, 12);
+    printf("Game Over! Score: %d", game_state.score);
     screenUpdate();
-
-    while (ch != 10 && timer <= 100) //enter or 5s
-    {
-        // Handle user input
-        if (keyhit()) 
-        {
-            ch = readch();
-            printKey(ch);
-            screenUpdate();
-        }
-
-        // Update game state (move elements, verify collision, etc)
-        if (timerTimeOver() == 1)
-        {
-            int newX = x + incX;
-            if (newX >= (MAXX -strlen("Hello World") -1) || newX <= MINX+1) incX = -incX;
-            int newY = y + incY;
-            if (newY >= MAXY-1 || newY <= MINY+1) incY = -incY;
-
-            printHello(newX, newY);
-
-            screenUpdate();
-            timer++;
-        }
-    }
-
-    keyboardDestroy();
-    screenDestroy();
-    timerDestroy();
+    timerInit(2000);
+    while(!timerTimeOver());
 
     return 0;
 }
