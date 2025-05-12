@@ -41,9 +41,23 @@ Um jogo de digitação emocionante onde você defende seu terminal contra ataque
 
 ---
 
-## Compilaar e Executar o CyberTerminal Hacker
-### Como **compilar** o Jogo?
+## 💻 Compilar e Executar o CyberTerminal Hacker
+### 🔧 Como **compilar** o Jogo?
 1. **Instale algum compilador C**:
 Como o nosso jogo só funciona em sistema operacional Linux e MacOS podemos fazer o seguinte:
    - Linux: Instalar o Linux ou alguma "distro", como por exemplo o Ubunto. Após isso, instale o gcc com o comando sudo apt-get install build-essential 
    - MacOS:
+
+### 🏃 Como **executar** o jogo?
+1. **Linux**: 
+   - No terminal Ubunto, crie uma pasta para guardar o projeto.
+   
+   ```
+   mkdir nomedapasta
+   ```
+   - Após isso, pegue o link do repositório e clone pelo terminal.
+
+   ```
+   git clone https://github.com/Duda-Rodrigues-Contato/Projeto-PIF.git
+   ```
+   
