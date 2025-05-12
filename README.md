@@ -1,5 +1,6 @@
 # Projeto-PIF
 
+[![License: BSD 3] (http://img.shields.io/github/license/Duda-Rodrigues-Contato/Projeto-PIF)] (/LICENSE)
 ---
 
 ## 📚 Informações Acadêmicas
@@ -38,3 +39,10 @@ Um jogo de digitação emocionante onde você defende seu terminal contra ataque
    - Inimigos rápidos e colisões destroem palavras inteiras.
 
 ---
+
+## Compilaar e Executar o CyberTerminal Hacker
+### Como **compilar** o Jogo?
+1. **Instale algum compilador C**:
+Como o nosso jogo só funciona em sistema operacional Linux e MacOS podemos fazer o seguinte:
+   - Linux: Instalar o Linux ou alguma "distro", como por exemplo o Ubunto. Após isso, instale o gcc com o comando sudo apt-get install build-essential 
+   - MacOS:
