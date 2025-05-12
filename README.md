@@ -50,14 +50,16 @@ Como o nosso jogo só funciona em sistema operacional Linux e MacOS podemos faze
 
 ### 🏃 Como **executar** o jogo?
 1. **Linux**: 
-   - No terminal Ubunto, crie uma pasta para guardar o projeto.
+   - No terminal Ubunto, crie uma pasta para guardar o projeto.</br>
    
    ```
    mkdir nomedapasta
    ```
+   </br>
    - Após isso, pegue o link do repositório e clone pelo terminal.
+   </br>
 
    ```
    git clone https://github.com/Duda-Rodrigues-Contato/Projeto-PIF.git
    ```
-   
+   </br>
