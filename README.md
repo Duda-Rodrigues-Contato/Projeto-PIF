@@ -1,6 +1,7 @@
 # Projeto-PIF
 
-[![License: BSD 3] (http://img.shields.io/github/license/Duda-Rodrigues-Contato/Projeto-PIF)] (/LICENSE)
+[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+
 ---
 
 ## 📚 Informações Acadêmicas
