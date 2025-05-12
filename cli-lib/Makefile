@@ -1,5 +1,4 @@
 PROJ_NAME = CyberTerminalHacker
-
 CC = gcc
 CFLAGS = -Iinclude -Wall -Wextra -g
 LDFLAGS = 
