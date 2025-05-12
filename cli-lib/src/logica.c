@@ -104,13 +104,18 @@ void handle_input(int ch) {
     // Verifica acerto
     if(strcmp(input_buffer, words[game_state.current_word].word) == 0) {
         game_state.score += 10;
+        words[game_state.current_word].active = 0;
         buffer_index = 0;
         input_buffer[0] = '\0';
-        words[game_state.current_word].active = 0;
         if(game_state.current_word < 4) {
             game_state.current_word++;
             words[game_state.current_word].active = 1;
         }
+    } else if (strlen(input_buffer) >= strlen(words[game_state.current_word].word)) {
+        // Caso erre a palavra:
+        game_state.lives -- ;
+        buffer_index = 0;
+        input_buffer[0] = '\0';
     }
 }
 
