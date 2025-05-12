@@ -53,10 +53,16 @@ void init_game() {
 }
 
 void update_phase() {
-    if(game_state.time_elapsed >= 60.0f) {
+
+    float phase_2_threshold = 30.0f + 0.1f;
+    float phase_3_threshold = 60.0f + 0.1f;
+
+    if(game_state.time_elapsed >= phase_3_threshold && game_state.current_phase != 3) {
+        printf("Teste Mudança para FASE 3 (timer = 100ms)\n");
         game_state.current_phase = 3;
         timerUpdateTimer(100);
-    } else if(game_state.time_elapsed >= 30.0f) {
+    } else if(game_state.time_elapsed >= phase_2_threshold && game_state.current_phase != 2) {
+        printf("Teste Mudança para FASE 2 (timer = 200ms)\n");
         game_state.current_phase = 2;
         timerUpdateTimer(200);
     }
@@ -95,7 +101,7 @@ void update_game() {
         for(int i = 0; i < WORD_COUNT; i++) {
             if(words[i].active) {
                 words[i].y += game_state.current_phase; // Movimento vertical
-                
+
                 if(words[i].y >= 23) { // Letra atingiu a base
                     game_state.lives--;
                     words[i].active = 0;
@@ -107,6 +113,7 @@ void update_game() {
 }
 
 void draw_game() {
+
     // Limpa posições anteriores
     for(int i = 0; i < WORD_COUNT; i++) {
         if(last_y_position[i] != -1) {
@@ -139,12 +146,17 @@ void draw_game() {
     screenUpdate();
 }
 
+
 void handle_input(int ch) {
+
+    int matched = 0;
+    
     if(ch == 127) { // Backspace
         if(buffer_index > 0) {
             buffer_index--;
             input_buffer[buffer_index] = '\0';
         }
+        return; //Não processa msi nada se for backspace
     }
     else if(isprint(ch)) { // Caractere imprimível
         if(buffer_index < MAX_WORD_LEN) {
@@ -166,6 +178,10 @@ void handle_input(int ch) {
             }
         }
     }
+
+    buffer_index = 0;
+    memset(input_buffer, 0, sizeof(input_buffer));
+
 }
 
 void restore_terminal() {
