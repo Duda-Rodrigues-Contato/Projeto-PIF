@@ -54,11 +54,11 @@ void update_phase() {
     float phase_2_threshold = 30.0f + 0.1f;
     float phase_3_threshold = 60.0f + 0.1f;
 
-    if(game_state.time_elapsed >= phase_3_threshold && game_state.current_phase != 3) {
+    if(game_state.time_elapsed >= phase_3_threshold && game_state.current_phase == 2) {
         printf("Teste Mudança para FASE 3 (timer = 100ms)\n");
         game_state.current_phase = 3;
         timerUpdateTimer(100);
-    } else if(game_state.time_elapsed >= phase_2_threshold && game_state.current_phase != 2) {
+    } else if(game_state.time_elapsed >= phase_2_threshold && game_state.current_phase == 1) {
         printf("Teste Mudança para FASE 2 (timer = 200ms)\n");
         game_state.current_phase = 2;
         timerUpdateTimer(200);
@@ -145,8 +145,6 @@ void draw_game() {
 
 
 void handle_input(int ch) {
-
-    int matched = 0;
     
     if(ch == 127) { 
         if(buffer_index > 0) {
