@@ -2,8 +2,8 @@
 #define LOGICA_H
 
 #define WORD_COUNT 10
-#define MAX_WORD_LEN 1  // Agora só 1 caractere
-#define TOTAL_TIME 90   // 1.5 minutos = 90 segundos
+#define MAX_WORD_LEN 1  
+#define TOTAL_TIME 90   
 #define SPAWN_INTERVAL 2.0
 typedef struct {
     char letter;
@@ -17,11 +17,11 @@ typedef struct {
     int lives;
     int current_phase;
     float time_elapsed;
-    int letters_active; // Contador de letras ativas
+    int letters_active; 
 } GameState;
 extern GameState game_state;
 
-// Declarações de funções
+
 void init_game();
 void restore_terminal();
 void handle_sigint(int sig);
