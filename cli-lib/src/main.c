@@ -29,19 +29,18 @@ int main() {
     screenClear();
     screenGotoxy(35, 12);
     if (game_state.time_elapsed >= TOTAL_TIME) {
-        printf("TIME'S UP! Final Score: %d", game_state.score);
+        printf("O TEMPO ACABOU! Final Score: %d", game_state.score);
     } else {
-        printf("GAME OVER! Final Score: %d", game_state.score);
+        printf("FIM DE JOGO! Final Score: %d", game_state.score);
     }
     screenUpdate();
 
     timerInit(3000);
     while (!timerTimeOver());
 
-    // Salvar a pontuação correta
     PlayerScore jogador;
     strcpy(jogador.username, username);
-    jogador.score = game_state.score;  // << CORREÇÃO AQUI
+    jogador.score = game_state.score;  
 
     salvarPontuacao(jogador);
     exibirRanking();
