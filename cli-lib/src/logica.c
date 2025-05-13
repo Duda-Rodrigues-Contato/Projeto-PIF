@@ -55,11 +55,9 @@ void update_phase() {
     float phase_3_threshold = 60.0f + 0.1f;
 
     if(game_state.time_elapsed >= phase_3_threshold && game_state.current_phase == 2) {
-        printf("Teste Mudança para FASE 3 (timer = 100ms)\n");
         game_state.current_phase = 3;
         timerUpdateTimer(100);
     } else if(game_state.time_elapsed >= phase_2_threshold && game_state.current_phase == 1) {
-        printf("Teste Mudança para FASE 2 (timer = 200ms)\n");
         game_state.current_phase = 2;
         timerUpdateTimer(200);
     }
@@ -110,23 +108,14 @@ void update_game() {
 }
 
 
-/*void drawNewBorder(int i) {
-
-    screenGotoxy(words[i].x, 0);
-    screenSetColor(WHITE, BLACK);
-    printf("-");
-}*/
-
-
 void draw_game() {
 
     
-    for(int i = 0; i < WORD_COUNT; i++) { // MUDAR COR DA LETRA (OU ESSA OU A DE BAIXO)
+    for(int i = 0; i < WORD_COUNT; i++) { 
         if(last_y_position[i] != -1) {
             screenSetColor(CYAN, DARKGRAY);
             screenGotoxy(words[i].x, last_y_position[i]);
             printf(" ");
-            /*drawNewBorder(i);*/
             screenUpdate();
         }
     }
@@ -144,13 +133,12 @@ void draw_game() {
     
     screenSetColor(WHITE, BLACK);
     screenGotoxy(2, 24);
-    printf("Tempo: %02d:%02d | Fase: %d | Score: %d | Vidas: %d | Texto: %s",
+    printf("Tempo: %02d:%02d | Fase: %d | Score: %d | Vidas: %d",
           (int)game_state.time_elapsed / 60,
           (int)game_state.time_elapsed % 60,
           game_state.current_phase,
           game_state.score,
-          game_state.lives,
-          input_buffer);
+          game_state.lives);
     screenUpdate();
 }
 
