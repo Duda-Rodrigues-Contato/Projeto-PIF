@@ -109,14 +109,26 @@ void update_game() {
     }
 }
 
+
+void drawNewBorder(int i) {
+
+    char vbc = BOX_VLINE;
+
+    screenGotoxy(words[i].x, 0);
+    printf("%c", vbc);
+}
+
+
 void draw_game() {
 
     
-    for(int i = 0; i < WORD_COUNT; i++) {
+    for(int i = 0; i < WORD_COUNT; i++) { // MUDAR COR DA LETRA (OU ESSA OU A DE BAIXO)
         if(last_y_position[i] != -1) {
-            screenSetColor(DARKGRAY, DARKGRAY);
+            screenSetColor(CYAN, DARKGRAY);
             screenGotoxy(words[i].x, last_y_position[i]);
             printf(" ");
+            drawNewBorder(i);
+            screenUpdate();
         }
     }
 
