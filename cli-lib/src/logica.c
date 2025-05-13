@@ -19,7 +19,7 @@ struct timeval start_time, last_spawn_time;
 void generate_word(int index) {
     words[index].letter = 'A' + (rand() % 26); 
     words[index].x = 10 + (rand() % 60);       
-    words[index].y = 1;                        
+    words[index].y = 2;                        
     words[index].active = 0;                   
 }
 
@@ -97,7 +97,7 @@ void update_game() {
     if(timerTimeOver()) {
         for(int i = 0; i < WORD_COUNT; i++) {
             if(words[i].active) {
-                words[i].y += game_state.current_phase; 
+                words[i].y += 1; 
 
                 if(words[i].y >= 23) { 
                     game_state.lives--;
@@ -110,13 +110,12 @@ void update_game() {
 }
 
 
-void drawNewBorder(int i) {
-
-    char vbc = BOX_VLINE;
+/*void drawNewBorder(int i) {
 
     screenGotoxy(words[i].x, 0);
-    printf("%c", vbc);
-}
+    screenSetColor(WHITE, BLACK);
+    printf("-");
+}*/
 
 
 void draw_game() {
@@ -127,7 +126,7 @@ void draw_game() {
             screenSetColor(CYAN, DARKGRAY);
             screenGotoxy(words[i].x, last_y_position[i]);
             printf(" ");
-            drawNewBorder(i);
+            /*drawNewBorder(i);*/
             screenUpdate();
         }
     }
@@ -145,7 +144,7 @@ void draw_game() {
     
     screenSetColor(WHITE, BLACK);
     screenGotoxy(2, 24);
-    printf("Time: %02d:%02d | Phase: %d | Score: %d | Lives: %d | Input: %s",
+    printf("Tempo: %02d:%02d | Fase: %d | Score: %d | Vidas: %d | Texto: %s",
           (int)game_state.time_elapsed / 60,
           (int)game_state.time_elapsed % 60,
           game_state.current_phase,
