@@ -1,3 +1,9 @@
+<<<<<<< Updated upstream
 Matheus 320
 Barack 340
 Kennedy 330
+=======
+Matheus 0
+Matheus 320
+Barack 340
+>>>>>>> Stashed changes
