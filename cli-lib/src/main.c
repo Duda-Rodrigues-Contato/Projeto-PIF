@@ -18,7 +18,7 @@ int main() {
     
     init_game();
 
-    while (game_state.lives > 0 && game_state.time_elapsed < TOTAL_TIME) {
+    while (game_config.vidas > 0 && game_config.tempoContrario < TOTAL_TIME) {
         if (keyhit()) {
             handle_input(readch());
         }
@@ -28,10 +28,10 @@ int main() {
 
     screenClear();
     screenGotoxy(35, 12);
-    if (game_state.time_elapsed >= TOTAL_TIME) {
-        printf("TIME'S UP! Final Score: %d", game_state.score);
+    if (game_config.tempoContrario >= TOTAL_TIME) {
+        printf("TIME'S UP! Final Score: %d", game_config.score);
     } else {
-        printf("GAME OVER! Final Score: %d", game_state.score);
+        printf("GAME OVER! Final Score: %d", game_config.score);
     }
     screenUpdate();
 
@@ -41,7 +41,7 @@ int main() {
     // Salvar a pontuação correta
     PlayerScore jogador;
     strcpy(jogador.username, username);
-    jogador.score = game_state.score;  // << CORREÇÃO AQUI
+    jogador.score = game_config.score;  // << CORREÇÃO AQUI
 
     salvarPontuacao(jogador);
     exibirRanking();

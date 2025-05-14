@@ -6,20 +6,20 @@
 #define TOTAL_TIME 90   
 #define SPAWN_INTERVAL 2.0
 typedef struct {
-    char letter;
+    char letra;
     int x, y;
-    int active;
-} FallingWord;
-extern FallingWord words[];
+    int ativo;
+} palavrasCaindo;
+extern palavrasCaindo words[];
 
 typedef struct {
     int score;
-    int lives;
-    int current_phase;
-    float time_elapsed;
-    int letters_active; 
-} GameState;
-extern GameState game_state;
+    int vidas;
+    int faseAtual;
+    float tempoContrario;
+    int letrasAtivas; 
+} gameConfig;
+extern gameConfig game_config;
 
 
 void init_game();

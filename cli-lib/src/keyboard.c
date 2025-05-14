@@ -10,25 +10,25 @@
 
 #include "keyboard.h"
 
-static struct termios initialSettings, newSettings;
-static int peekCharacter;
+static struct termios consiguracaoInicial, novasConfigs;
+static int pegarCaracter;
 
 
 void keyboardInit()
 {
-    tcgetattr(0,&initialSettings);
-    newSettings = initialSettings;
-    newSettings.c_lflag &= ~ICANON;
-    newSettings.c_lflag &= ~ECHO;
-    newSettings.c_lflag &= ~ISIG;
-    newSettings.c_cc[VMIN] = 1;
-    newSettings.c_cc[VTIME] = 0;
-    tcsetattr(0, TCSANOW, &newSettings);
+    tcgetattr(0,&consiguracaoInicial);
+    novasConfigs = consiguracaoInicial;
+    novasConfigs.c_lflag &= ~ICANON;
+    novasConfigs.c_lflag &= ~ECHO;
+    novasConfigs.c_lflag &= ~ISIG;
+    novasConfigs.c_cc[VMIN] = 1;
+    novasConfigs.c_cc[VTIME] = 0;
+    tcsetattr(0, TCSANOW, &novasConfigs);
 }
 
 void keyboardDestroy()
 {
-    tcsetattr(0, TCSANOW, &initialSettings);
+    tcsetattr(0, TCSANOW, &consiguracaoInicial);
 }
 
 int keyhit()
@@ -36,17 +36,17 @@ int keyhit()
     unsigned char ch;
     int nread;
 
-    if (peekCharacter != -1) return 1;
+    if (pegarCaracter != -1) return 1;
     
-    newSettings.c_cc[VMIN]=0;
-    tcsetattr(0, TCSANOW, &newSettings);
+    novasConfigs.c_cc[VMIN]=0;
+    tcsetattr(0, TCSANOW, &novasConfigs);
     nread = read(0,&ch,1);
-    newSettings.c_cc[VMIN]=1;
-    tcsetattr(0, TCSANOW, &newSettings);
+    novasConfigs.c_cc[VMIN]=1;
+    tcsetattr(0, TCSANOW, &novasConfigs);
     
     if(nread == 1) 
     {
-        peekCharacter = ch;
+        pegarCaracter = ch;
         return 1;
     }
     
@@ -57,10 +57,10 @@ int readch()
 {
     char ch;
 
-    if(peekCharacter != -1)
+    if(pegarCaracter != -1)
     {
-        ch = peekCharacter;
-        peekCharacter = -1;
+        ch = pegarCaracter;
+        pegarCaracter = -1;
         return ch;
     }
     read(0,&ch,1);
