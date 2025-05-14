@@ -21,7 +21,7 @@ void generate_word(int index) {
     palavras[index].x = 10 + (rand() % 60);       
     palavras[index].y = 2;                        
     palavras[index].ativo = 0;                   
-    palavras[index].cor = rand() % 6 + 1;         // cor aleatória (1 a 6)
+    palavras[index].cor = rand() % 6 + 1;        
 }
 
 void init_game() {
@@ -54,10 +54,10 @@ void update_phase() {
 
     if(game_config.tempoContrario >= tempoAlteradoFase3 && game_config.faseAtual == 2) {
         game_config.faseAtual = 3;
-        timerUpdateTimer(100); // fase 3 mais rápida
+        timerUpdateTimer(100); 
     } else if(game_config.tempoContrario >= tempoAlteradoFase2 && game_config.faseAtual == 1) {
         game_config.faseAtual = 2;
-        timerUpdateTimer(200); // fase 2 mais rápida
+        timerUpdateTimer(200);
     }
 }
 
@@ -94,7 +94,7 @@ void update_game() {
                 palavras[i].y += 1;
 
                 if(palavras[i].y >= 23) {
-                    game_config.vidas--;                 // ⬅️ cada letra que cai reduz 1 vida
+                    game_config.vidas--;                 
                     palavras[i].ativo = 0;
                     game_config.letrasAtivas--;
                 }
@@ -115,7 +115,6 @@ void draw_game() {
 
     for(int i = 0; i < WORD_COUNT; i++) {
         if(palavras[i].ativo) {
-            // letras com cores diferentes
             int cor = palavras[i].cor;
             switch (cor) {
                 case 1: screenSetColor(RED, DARKGRAY); break;

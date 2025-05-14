@@ -4,6 +4,7 @@
 #include "../include/ranking.h"
 
 #define MAX_PLAYERS 100
+#define MAX_LINE 128
 
 void salvarPontuacao(PlayerScore player) {
     FILE *file = fopen("ranking.txt", "a");
@@ -11,7 +12,7 @@ void salvarPontuacao(PlayerScore player) {
         fprintf(file, "%s %d\n", player.username, player.score);
         fclose(file);
     } else {
-        printf("Erro ao abrir o arquivo de ranking.\n");
+        fprintf(stderr, "Erro ao abrir o arquivo de ranking.\n");
     }
 }
 
@@ -27,19 +28,23 @@ void exibirRanking() {
 
     FILE *file = fopen("ranking.txt", "r");
     if (file != NULL) {
-        while (fscanf(file, "%49s %d", players[count].username, &players[count].score) == 2 && count < MAX_PLAYERS) {
-            count++;
+        char line[MAX_LINE];
+        while (fgets(line, sizeof(line), file) && count < MAX_PLAYERS) {
+            if (sscanf(line, "%49s %d", players[count].username, &players[count].score) == 2) {
+                count++;
+            }
         }
         fclose(file);
     } else {
-        printf("Erro ao abrir o arquivo de ranking.\n");
+        fprintf(stderr, "Erro ao abrir o arquivo de ranking.\n");
         return;
     }
 
     qsort(players, count, sizeof(PlayerScore), compareScores);
 
     printf("\n--- Ranking ---\n");
-    for (int i = 0; i < count; i++) {
+    int top = count < 10 ? count : 10;
+    for (int i = 0; i < top; i++) {
         printf("%d. %s - %d pontos\n", i + 1, players[i].username, players[i].score);
     }
 }
