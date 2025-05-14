@@ -9,6 +9,7 @@ typedef struct {
     char letra;
     int x, y;
     int ativo;
+    int cor;
 } palavrasCaindo;
 extern palavrasCaindo words[];
 
