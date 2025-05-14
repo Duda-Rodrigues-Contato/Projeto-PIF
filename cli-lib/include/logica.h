@@ -4,7 +4,7 @@
 #define WORD_COUNT 10
 #define MAX_WORD_LEN 1  
 #define TOTAL_TIME 90   
-#define SPAWN_INTERVAL 2.0
+#define SPAWN_INTERVAL 2.2
 typedef struct {
     char letra;
     int x, y;

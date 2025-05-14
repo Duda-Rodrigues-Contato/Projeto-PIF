@@ -54,7 +54,7 @@ void update_phase() {
 
     if(game_config.tempoContrario >= tempoAlteradoFase3 && game_config.faseAtual == 2) {
         game_config.faseAtual = 3;
-        timerUpdateTimer(100); 
+        timerUpdateTimer(125);
     } else if(game_config.tempoContrario >= tempoAlteradoFase2 && game_config.faseAtual == 1) {
         game_config.faseAtual = 2;
         timerUpdateTimer(200);
@@ -75,18 +75,18 @@ void update_game() {
 
     int letrasParaSpawnar = game_config.faseAtual;
 
-    if(time_since_last_spawn > SPAWN_INTERVAL) {
-        int spawn_count = 0;
-        for(int i = 0; i < WORD_COUNT && spawn_count < letrasParaSpawnar; i++) {
-            if(!palavras[i].ativo) {
-                generate_word(i); 
-                palavras[i].ativo = 1;
-                game_config.letrasAtivas++;
-                spawn_count++;
-            }
+if(time_since_last_spawn > SPAWN_INTERVAL) {
+    int spawn_count = 0;
+    for(int i = 0; i < WORD_COUNT && spawn_count < letrasParaSpawnar; i++) {
+        if(!palavras[i].ativo) {
+            generate_word(i); 
+            palavras[i].ativo = 1;
+            game_config.letrasAtivas++;
+            spawn_count++;
         }
-        gettimeofday(&ultimoSpawnTempo, NULL); 
     }
+    gettimeofday(&ultimoSpawnTempo, NULL); 
+}
 
     if(timerTimeOver()) {
         for(int i = 0; i < WORD_COUNT; i++) {
