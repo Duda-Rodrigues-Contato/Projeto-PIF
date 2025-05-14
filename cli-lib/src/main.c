@@ -28,17 +28,11 @@ int main() {
 
     screenClear();
     screenGotoxy(35, 12);
-<<<<<<< HEAD
+
     if (game_config.tempoContrario >= TOTAL_TIME) {
-        printf("TIME'S UP! Final Score: %d", game_config.score);
+        printf("O TEMPO ACABOU! Final Score: %d", game_config.score);
     } else {
-        printf("GAME OVER! Final Score: %d", game_config.score);
-=======
-    if (game_state.time_elapsed >= TOTAL_TIME) {
-        printf("O TEMPO ACABOU! Final Score: %d", game_state.score);
-    } else {
-        printf("FIM DE JOGO! Final Score: %d", game_state.score);
->>>>>>> 75deac6fcbccb3806da954f779af84ac47106a40
+        printf("FIM DE JOGO! Final Score: %d", game_config.score);
     }
     screenUpdate();
 
@@ -47,11 +41,8 @@ int main() {
 
     PlayerScore jogador;
     strcpy(jogador.username, username);
-<<<<<<< HEAD
-    jogador.score = game_config.score;  // << CORREÇÃO AQUI
-=======
-    jogador.score = game_state.score;  
->>>>>>> 75deac6fcbccb3806da954f779af84ac47106a40
+
+    jogador.score = game_config.score;
 
     salvarPontuacao(jogador);
     exibirRanking();
