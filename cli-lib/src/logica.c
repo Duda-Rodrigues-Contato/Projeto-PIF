@@ -70,19 +70,19 @@ void update_game() {
 
     update_phase();
 
-    float time_since_last_spawn = (current_time.tv_sec - ultimoSpawnTempo.tv_sec) +
+    float tempoDesdeUltimoSpawn = (current_time.tv_sec - ultimoSpawnTempo.tv_sec) +
                                  (current_time.tv_usec - ultimoSpawnTempo.tv_usec) / 1000000.0f;
 
     int letrasParaSpawnar = game_config.faseAtual;
 
-if(time_since_last_spawn > SPAWN_INTERVAL) {
-    int spawn_count = 0;
-    for(int i = 0; i < WORD_COUNT && spawn_count < letrasParaSpawnar; i++) {
+if(tempoDesdeUltimoSpawn > SPAWN_INTERVAL) {
+    int contSpawn = 0;
+    for(int i = 0; i < WORD_COUNT && contSpawn < letrasParaSpawnar; i++) {
         if(!palavras[i].ativo) {
             generate_word(i); 
             palavras[i].ativo = 1;
             game_config.letrasAtivas++;
-            spawn_count++;
+            contSpawn++;
         }
     }
     gettimeofday(&ultimoSpawnTempo, NULL); 
