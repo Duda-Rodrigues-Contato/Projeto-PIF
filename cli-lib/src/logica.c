@@ -17,17 +17,17 @@ int ultimaPosicao_y[WORD_COUNT];
 struct timeval tempoInicial, ultimoSpawnTempo;
 
 void generate_word(int index) {
-    palavras[index].letra = 'A' + (rand() % 26); 
-    palavras[index].x = 10 + (rand() % 60);       
-    palavras[index].y = 2;                        
-    palavras[index].ativo = 0;                   
-    palavras[index].cor = rand() % 6 + 1;        
+    palavras[index].letra = 'A' + (rand() % 26);
+    palavras[index].x = 10 + (rand() % 60);
+    palavras[index].y = 2;
+    palavras[index].ativo = 0;
+    palavras[index].cor = rand() % 6 + 1;
 }
 
 void init_game() {
     gettimeofday(&tempoInicial, NULL);
     gettimeofday(&ultimoSpawnTempo, NULL);
-    srand(time(NULL)); 
+    srand(time(NULL));
     screenInit(1);
     keyboardInit();
     timerInit(300);
@@ -40,7 +40,7 @@ void init_game() {
     game_config.letrasAtivas = 0;
 
     for(int i = 0; i < WORD_COUNT; i++) {
-        generate_word(i); 
+        generate_word(i);
         ultimaPosicao_y[i] = -1;
     }
 
@@ -64,37 +64,38 @@ void update_phase() {
 void update_game() {
     struct timeval current_time;
     gettimeofday(&current_time, NULL);
-    
+
     game_config.tempoContrario = (current_time.tv_sec - tempoInicial.tv_sec) +
-                             (current_time.tv_usec - tempoInicial.tv_usec) / 1000000.0f;
+                                 (current_time.tv_usec - tempoInicial.tv_usec) / 1000000.0f;
 
     update_phase();
 
     float tempoDesdeUltimoSpawn = (current_time.tv_sec - ultimoSpawnTempo.tv_sec) +
-                                 (current_time.tv_usec - ultimoSpawnTempo.tv_usec) / 1000000.0f;
+                                  (current_time.tv_usec - ultimoSpawnTempo.tv_usec) / 1000000.0f;
 
     int letrasParaSpawnar = game_config.faseAtual;
 
-if(tempoDesdeUltimoSpawn > SPAWN_INTERVAL) {
-    int contSpawn = 0;
-    for(int i = 0; i < WORD_COUNT && contSpawn < letrasParaSpawnar; i++) {
-        if(!palavras[i].ativo) {
-            generate_word(i); 
-            palavras[i].ativo = 1;
-            game_config.letrasAtivas++;
-            contSpawn++;
+    if(tempoDesdeUltimoSpawn > SPAWN_INTERVAL) {
+        int contSpawn = 0;
+        for(int i = 0; i < WORD_COUNT && contSpawn < letrasParaSpawnar; i++) {
+            if(!palavras[i].ativo) {
+                generate_word(i);
+                palavras[i].ativo = 1;
+                game_config.letrasAtivas++;
+                contSpawn++;
+            }
         }
+        gettimeofday(&ultimoSpawnTempo, NULL);
     }
-    gettimeofday(&ultimoSpawnTempo, NULL); 
-}
 
     if(timerTimeOver()) {
         for(int i = 0; i < WORD_COUNT; i++) {
             if(palavras[i].ativo) {
                 palavras[i].y += 1;
+                palavras[i].cor = rand() % 6 + 1;
 
                 if(palavras[i].y >= 23) {
-                    game_config.vidas--;                 
+                    game_config.vidas--;
                     palavras[i].ativo = 0;
                     game_config.letrasAtivas--;
                 }
@@ -128,7 +129,7 @@ void draw_game() {
 
             screenGotoxy(palavras[i].x, palavras[i].y);
             printf("%c", palavras[i].letra);
-            ultimaPosicao_y[i] = palavras[i].y; 
+            ultimaPosicao_y[i] = palavras[i].y;
         }
     }
 
@@ -144,16 +145,16 @@ void draw_game() {
 }
 
 void handle_input(int ch) {
-    if(ch == 127) { 
+    if(ch == 127) {
         if(buffer_index > 0) {
             buffer_index--;
             input_buffer[buffer_index] = '\0';
         }
-        return; 
+        return;
     }
-    else if(isprint(ch)) { 
+    else if(isprint(ch)) {
         if(buffer_index < MAX_WORD_LEN) {
-            input_buffer[buffer_index++] = toupper(ch); 
+            input_buffer[buffer_index++] = toupper(ch);
             input_buffer[buffer_index] = '\0';
         }
     }
@@ -163,10 +164,10 @@ void handle_input(int ch) {
             if(palavras[i].ativo && (input_buffer[0] == palavras[i].letra)) {
                 game_config.score += 10;
                 buffer_index = 0;
-                memset(input_buffer, 0, sizeof(input_buffer)); 
+                memset(input_buffer, 0, sizeof(input_buffer));
                 palavras[i].ativo = 0;
                 game_config.letrasAtivas--;
-                break; 
+                break;
             }
         }
     }
@@ -178,12 +179,12 @@ void handle_input(int ch) {
 void restore_terminal() {
     keyboardDestroy();
     screenDestroy();
-    printf("\033[0m\033[?25h\n"); 
+    printf("\033[0m\033[?25h\n");
     fflush(stdout);
 }
 
 void handle_sigint(int sig) {
-    (void)sig; 
+    (void)sig;
     restore_terminal();
     exit(0);
 }
