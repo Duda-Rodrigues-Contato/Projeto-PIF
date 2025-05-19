@@ -115,7 +115,7 @@ void draw_game() {
     }
 
     for(int i = 0; i < WORD_COUNT; i++) {
-        if(palavras[i].ativo) {
+        if(palavras[i].ativo && palavras[i].y < MAXY) {
             int cor = palavras[i].cor;
             switch (cor) {
                 case 1: screenSetColor(RED, DARKGRAY); break;
