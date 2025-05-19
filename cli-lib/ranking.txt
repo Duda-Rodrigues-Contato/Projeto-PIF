@@ -11,17 +11,9 @@ teste 480
 teste 230
 teste 300
 teste92398 490
-<<<<<<< HEAD
-letxi 540
-letxidnv 610
-livinha 200
-livinha 220
-letiiii 880
-leticia 870
-=======
 ferraz 690
 goncalves 670
 Dre 790
->>>>>>> 2f2c0534e8ffebbc0deb4f742393543f841d512b
 fdfd 0
 Matheus 770
+JonasBrothers 30

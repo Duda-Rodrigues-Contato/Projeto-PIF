@@ -145,7 +145,9 @@ void draw_game() {
 }
 
 void handle_input(int ch) {
-    if(ch == 127) {
+    int letracerta = 0; 
+
+    if(ch == 127) { 
         if(buffer_index > 0) {
             buffer_index--;
             input_buffer[buffer_index] = '\0';
@@ -163,14 +165,19 @@ void handle_input(int ch) {
         for(int i = 0; i < WORD_COUNT; i++) {
             if(palavras[i].ativo && (input_buffer[0] == palavras[i].letra)) {
                 game_config.score += 10;
-                buffer_index = 0;
-                memset(input_buffer, 0, sizeof(input_buffer));
+                letracerta = 1; 
                 palavras[i].ativo = 0;
                 game_config.letrasAtivas--;
                 break;
             }
         }
+
+        
+        if(!letracerta && game_config.vidas > 0) {
+            game_config.vidas--;
+        }
     }
+
 
     buffer_index = 0;
     memset(input_buffer, 0, sizeof(input_buffer));
