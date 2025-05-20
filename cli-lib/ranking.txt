@@ -17,3 +17,6 @@ Dre 790
 fdfd 0
 Matheus 770
 JonasBrothers 30
+duda 420
+teste1 50
+dudaaa 50

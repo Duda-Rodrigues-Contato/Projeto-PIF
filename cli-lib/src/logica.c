@@ -18,7 +18,7 @@ struct timeval tempoInicial, ultimoSpawnTempo;
 
 void generate_word(int index) {
     palavras[index].letra = 'A' + (rand() % 26);
-    palavras[index].x = 10 + (rand() % 60);
+    palavras[index].x = SCRSTARTX + (rand() % (SCRENDX - SCRSTARTX));
     palavras[index].y = 2;
     palavras[index].ativo = 0;
     palavras[index].cor = rand() % 6 + 1;
@@ -94,7 +94,7 @@ void update_game() {
                 palavras[i].y += 1;
                 palavras[i].cor = rand() % 6 + 1;
 
-                if(palavras[i].y >= 23) {
+                if(palavras[i].y >= SCRENDY) {
                     game_config.vidas--;
                     palavras[i].ativo = 0;
                     game_config.letrasAtivas--;
@@ -134,7 +134,7 @@ void draw_game() {
     }
 
     screenSetColor(WHITE, BLACK);
-    screenGotoxy(2, 24);
+    screenGotoxy(77, 54);
     printf("Tempo: %02d:%02d | Fase: %d | Score: %d | Vidas: %d",
           (int)game_config.tempoContrario / 60,
           (int)game_config.tempoContrario % 60,
