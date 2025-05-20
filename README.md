@@ -52,7 +52,7 @@ Um jogo de digitação emocionante onde você defende seu terminal contra ataque
 
 Nosso jogo funciona via **terminal** e é compilado com `gcc` utilizando um `Makefile`. Abaixo estão os passos para cada sistema operacional:
 
-#### 🪟 Windows (via WSL - Ubuntu)
+#### 💻 Windows (via WSL - Ubuntu)
 1. Instale o WSL com Ubuntu:  
    [Guia oficial da Microsoft](https://learn.microsoft.com/pt-br/windows/wsl/install)
 2. No Ubuntu (WSL), instale os compiladores:
