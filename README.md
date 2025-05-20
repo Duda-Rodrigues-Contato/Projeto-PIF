@@ -19,16 +19,21 @@
 ---
 
 ## 🎮 CyberTerminal Hacker
-Um jogo de digitação emocionante onde você defende seu terminal contra ataques hackers digitando palavras que aparecem na tela enquanto evita vírus invasores.
+Um jogo de digitação emocionante que vai desafiar seus reflexos e velocidade por meio de um CyberTerminal Hacker!
 
-### 🕹️ Como Jogar
-- **Objetivo**: Digite corretamente as letras que caem do topo da tela para evitar que os vírus (as letras) atinjam a base do terminal
-- **Barra Inferior**:
-  - Mostra o tempo decorrido
-  - Exibe a quantidade de pontos atual do jogador
-  - Mostra a fase em que o jogador se encontra
-  - Exibe suas vidas restantes
-- **Interação**: Use o teclado para digitar as letras antes que elas desapareçam e tirem suas vidas, cada tentativa de eliminar uma letra errada, remove uma vida do player
+### 🎯 OBJETIVO
+Defenda seu terminal contra ataques hackers digitando as letras que aparecem na tela antes que:
+- As letras atinjam a base do terminal
+- Seu número de vidas chegue a zero
+- Até que você supere as 3 fases de 30s cada
+
+### 🎮 CONTROLES E INTERFACE
+- **Teclado**: Digite exatamente as letras que aparecem
+- **Painel inferior**:
+  - ⏱️ Cronômetro do jogo
+  - 🏆 Pontuação acumulada
+  - 🎮 Nível atual
+  - ❤️ Contador de vidas (inicia com 3)
 
 ### 📊 Níveis de Dificuldade
 1. **Nível 1**:
@@ -46,6 +51,13 @@ Um jogo de digitação emocionante onde você defende seu terminal contra ataque
 
 ---
 
+### ⚖️ SISTEMA DE PONTOS E PUNIÇÕES
+| Situação | Consequência |
+|----------|--------------|
+| Digitar corretamente | ➕ 10 pontos |
+| Digitar errado | ➖ 1 vida |
+| Letra chegar na base | ➖ 1 vida |
+| Completar nível | 🔓 Desbloqueia próxima fase |
 ## 💻 Compilar e Executar o CyberTerminal Hacker
 
 ### 🔧 Como **compilar** o jogo?
