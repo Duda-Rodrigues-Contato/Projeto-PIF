@@ -103,15 +103,15 @@ Nosso jogo funciona via **terminal** e é compilado com `gcc` utilizando um `Mak
 
 ### ✅ Exemplo completo no terminal (Linux/WSL/macOS)
 
-git clone https://github.com/Duda-Rodrigues-Contato/Projeto-PIF.git
-cd Projeto-PIF
-make
-./cli-lib/build/bin/CyberTerminalHacker
+   - git clone https://github.com/Duda-Rodrigues-Contato/Projeto-PIF.git
+   - cd Projeto-PIF
+   - make
+   - ./cli-lib/build/bin/CyberTerminalHacker
 
 **Ou:**
 
-git clone https://github.com/Duda-Rodrigues-Contato/Projeto-PIF.git
-cd cli-lib
-make run
+   - git clone https://github.com/Duda-Rodrigues-Contato/Projeto-PIF.git
+   - cd cli-lib
+   - make run
 
 ---
